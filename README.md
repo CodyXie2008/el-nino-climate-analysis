@@ -1,9 +1,25 @@
-# Santa Barbara NOAA LCD downloader
+# El Niño and Santa Barbara Climate
 
-This project downloads annual NOAA Local Climatological Data (LCD) CSV files
-for Santa Barbara Municipal Airport, station `USW00023190`.
+This repository contains a reproducible dataset for studying the relationship
+between El Niño–Southern Oscillation (ENSO) conditions and local weather in
+Santa Barbara, California.
 
-## Data included in this repository
+The study location is **Santa Barbara Municipal Airport** (`USW00023190`).
+The project combines the station's NOAA Local Climatological Data (LCD) with
+NOAA Climate Prediction Center (CPC) ENSO sea-surface-temperature indices.
+
+## Research focus
+
+The data support questions such as:
+
+- How do Santa Barbara precipitation and temperature vary during El Niño and
+  La Niña conditions?
+- Do large positive or negative Niño 3.4 / ONI / RONI values coincide with
+  unusually wet, dry, warm, or cool periods locally?
+- Does the relationship change when using weekly, monthly, or seasonal ENSO
+  indicators?
+
+## Included data
 
 The downloaded data are intentionally retained in this repository for
 reproducibility:
@@ -12,6 +28,31 @@ reproducibility:
   1937–2026, plus `download_manifest.csv`.
 - `data/enso_indices/` — CPC ENSO SST/Relative SST CSV conversions, source
   files, and a download manifest.
+
+### Dataset layout
+
+```text
+data/
+├── raw_lcd/                         # 1937–2026 Santa Barbara LCD CSV files
+│   └── download_manifest.csv         # Retrieval and header-validation results
+└── enso_indices/
+    ├── relative_weekly_oisst.csv
+    ├── relative_monthly_oisst.csv
+    ├── relative_monthly_ersstv6.csv
+    ├── relative_seasonal_ersstv6_roni.csv
+    ├── sst_weekly_oisst.csv
+    ├── sst_monthly_oisst.csv
+    ├── sst_monthly_ersstv6.csv
+    ├── sst_seasonal_ersstv6_oni.csv
+    ├── download_manifest.csv
+    └── raw/                          # Original files downloaded from CPC
+```
+
+For a monthly Santa Barbara analysis, useful LCD fields include
+`DailyPrecipitation`, `DailyAverageDryBulbTemperature`,
+`DailyMaximumDryBulbTemperature`, and `DailyMinimumDryBulbTemperature`.
+Aggregate the daily observations to the same time scale as the chosen ENSO
+index before comparing them.
 
 ### Official download sources
 
@@ -29,7 +70,7 @@ https://www.ncei.noaa.gov/oa/local-climatological-data/v2/access/{YEAR}/LCD_USW0
 Therefore the downloader requests each year's file directly; it does not need
 to load or search the large directory page.
 
-## Run it
+## Reproduce the data download
 
 Python 3.9+ is sufficient; no third-party packages are needed.
 
@@ -37,7 +78,7 @@ Python 3.9+ is sufficient; no third-party packages are needed.
 # Small test: download 1937 only
 python .\download_lcd.py --start-year 1937 --end-year 1937
 
-# Download the full study period
+# Download the full LCD study period
 python .\download_lcd.py --start-year 1937 --end-year 2026
 ```
 
@@ -65,7 +106,7 @@ python .\validate_lcd_schema.py --reference-year 2026
 position as the 2026 template—for example, column 1 is `STATION`, column 2 is
 `DATE`, and so on. If not, `header_first_difference` gives the first mismatch.
 
-## Download ENSO sea-surface-temperature indices
+### Download ENSO sea-surface-temperature indices
 
 ```powershell
 python .\download_enso_indices.py
@@ -74,3 +115,11 @@ python .\download_enso_indices.py
 This downloads the eight relevant NOAA CPC source files and converts them to
 CSV in `data/enso_indices/`: Relative SST and SST at weekly, monthly, and
 seasonal frequencies. Raw source files are retained in `data/enso_indices/raw/`.
+
+## Notes for interpretation
+
+- **ONI** is the seasonal Niño 3.4 SST anomaly; **RONI** is its relative-SST
+  counterpart.
+- The present calendar year's LCD file is incomplete until the year ends.
+- The source files are retained alongside the CSV conversions so every
+  transformation can be checked against NOAA's original publication.
