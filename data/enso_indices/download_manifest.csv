@@ -1,0 +1,9 @@
+dataset,frequency,source_file,source_url,csv_file,rows,columns
+relative_weekly_oisst,weekly,rel_wksst9120.txt,https://www.cpc.ncep.noaa.gov/data/indices/rel_wksst9120.txt,relative_weekly_oisst.csv,2354,5
+relative_monthly_oisst,monthly,rel_mthsst9120.txt,https://www.cpc.ncep.noaa.gov/data/indices/rel_mthsst9120.txt,relative_monthly_oisst.csv,541,6
+relative_monthly_ersstv6,monthly,Rnino34.ascii.txt,https://www.cpc.ncep.noaa.gov/data/indices/Rnino34.ascii.txt,relative_monthly_ersstv6.csv,922,3
+relative_seasonal_ersstv6_roni,seasonal,RONI.ascii.txt,https://www.cpc.ncep.noaa.gov/data/indices/RONI.ascii.txt,relative_seasonal_ersstv6_roni.csv,920,3
+sst_weekly_oisst,weekly,wksst9120.for,https://www.cpc.ncep.noaa.gov/data/indices/wksst9120.for,sst_weekly_oisst.csv,2355,9
+sst_monthly_oisst,monthly,sstoi.indices,https://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices,sst_monthly_oisst.csv,537,10
+sst_monthly_ersstv6,monthly,detrend.nino34.ascii.txt,https://www.cpc.ncep.noaa.gov/data/indices/detrend.nino34.ascii.txt,sst_monthly_ersstv6.csv,922,5
+sst_seasonal_ersstv6_oni,seasonal,oni.ascii.txt,https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt,sst_seasonal_ersstv6_oni.csv,920,4
