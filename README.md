@@ -116,6 +116,44 @@ This downloads the eight relevant NOAA CPC source files and converts them to
 CSV in `data/enso_indices/`: Relative SST and SST at weekly, monthly, and
 seasonal frequencies. Raw source files are retained in `data/enso_indices/raw/`.
 
+## Build the monthly precipitation–ENSO analysis table
+
+```powershell
+python .\build_monthly_precip_enso.py
+```
+
+This creates `data/processed/santa_barbara_monthly_precip_enso.csv` for
+1950–2025. It sums `DailyPrecipitation` from daily-summary (`SOD`) records by
+month and matches each month to the CPC three-month season centered on it:
+January → DJF, February → JFM, through December → NDJ. The output contains
+seasonal RONI and ONI anomalies plus coverage and trace-precipitation fields.
+
+To include the latest available observations from the still-in-progress 2026
+file, run:
+
+```powershell
+python .\build_monthly_precip_enso.py --end-year 2026
+```
+
+The script stops at the most recent available daily observation rather than
+creating rows for future months. Newly completed CPC seasonal values can lag
+behind the monthly precipitation release, so the newest `roni_anom_c` and
+`oni_anom_c` cells may remain blank until CPC publishes them.
+
+## Plot monthly precipitation and ENSO
+
+```powershell
+python .\plot_monthly_precip_enso.py
+```
+
+This creates `figures/monthly_precip_anomaly_roni.png`. The upper panel shows
+monthly total-precipitation anomalies against the same calendar month’s
+1991–2020 mean. The lower panel shows the matching seasonal RONI value. Months
+with less than 90% daily precipitation coverage are excluded.
+
+See [the chart notes](figures/monthly_precip_anomaly_roni.md) for the method,
+interpretation, and an explanation of precipitation-data gaps.
+
 ## Notes for interpretation
 
 - **ONI** is the seasonal Niño 3.4 SST anomaly; **RONI** is its relative-SST
