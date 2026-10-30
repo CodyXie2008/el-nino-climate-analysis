@@ -151,8 +151,35 @@ monthly total-precipitation anomalies against the same calendar month’s
 1991–2020 mean. The lower panel shows the matching seasonal RONI value. Months
 with less than 90% daily precipitation coverage are excluded.
 
-See [the chart notes](figures/monthly_precip_anomaly_roni.md) for the method,
-interpretation, and an explanation of precipitation-data gaps.
+See [the monthly time-series notes](docs/monthly_precip_anomaly_roni.md)
+for the method, interpretation, and an explanation of precipitation-data gaps.
+
+## Explore the relationship by calendar month
+
+```powershell
+python .\analyze_monthly_enso_relationship.py
+```
+
+This creates a 12-panel scatterplot, one panel for each calendar month, plus
+`data/processed/monthly_roni_precipitation_correlations.csv`. Each panel
+reports its sample size and Pearson correlation; it is exploratory evidence,
+not a causal estimate.
+
+See [the month-by-month scatterplot notes](docs/monthly_roni_precipitation_relationships.md)
+for how each panel is constructed and interpreted.
+
+## Analyze winter ENSO probability
+
+```powershell
+python .\analyze_djf_enso_probability.py
+```
+
+This matches DJF RONI with the mean of December–February precipitation
+anomalies. It creates seasonal data, phase summaries, and a three-panel figure
+comparing El Niño, neutral, and La Niña conditions.
+
+The full statistical design and formulas are in
+[DJF RONI precipitation methodology](docs/djf_roni_precipitation_model.md).
 
 ## Notes for interpretation
 

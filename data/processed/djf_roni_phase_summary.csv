@@ -1,0 +1,4 @@
+roni_phase,n,mean_anomaly_mm_month,median_anomaly_mm_month,wetter_than_normal_n,wetter_than_normal_probability,wetter_than_normal_ci_low,wetter_than_normal_ci_high,very_wet_n,very_wet_probability
+La Nina,22,-8.60,-27.36,7,0.318,0.164,0.527,5,0.227
+Neutral,25,-21.34,-20.13,4,0.160,0.064,0.347,1,0.040
+El Nino,25,19.64,34.54,14,0.560,0.371,0.733,12,0.480
